@@ -4,6 +4,11 @@ import "dotenv/config"
 
 import { MongoClient, ServerApiVersion, ObjectId } from 'mongodb';
 
+// const https = require('https');
+// const http = require('http');
+
+// const fs = require('fs');
+
 
 
 // config
@@ -18,6 +23,9 @@ const port = process.env.PORT || 5000
 app.use(cors())
 
 app.use(express.json())
+
+
+
 
 
 
@@ -40,7 +48,19 @@ const run = async () => {
         const productsCollection = client.db("emajonsonNodeMongo").collection("products");
         console.log("db connected to mongo")
 
+        // get product 
 
+        app.get('/product', async (req, res) => {
+            const query = req.body
+
+            console.log(query);
+            const cursor = productsCollection.find(query)
+
+            const products = await cursor.toArray()
+            res.send(products)
+
+
+        })
 
 
 
@@ -69,3 +89,77 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
     console.log("Listening to port", port)
 })
+
+
+// const httpServer = http.createServer(app);
+// const httpsServer = https.createServer({
+// }, app);
+
+// httpServer.listen(80, () => {
+//     console.log('HTTP Server running on port 80');
+
+//     const run = async () => {
+//         try {
+//             await client.connect();
+//             const productsCollection = client.db("emajonsonNodeMongo").collection("products");
+//             console.log("db connected to mongo")
+
+//             // get product
+
+//             app.get('/product', async (req, res) => {
+//                 const query = req.body
+//                 const cursor = productsCollection.find(query)
+
+//                 const products = await cursor.toArray()
+//                 res.send(products)
+
+
+//             })
+
+
+
+//         }
+
+
+//         finally {
+//             // await client.close();
+//         }
+
+//     }
+//     run().catch(console.dir);
+
+// });
+
+// httpsServer.listen(443, () => {
+//     console.log('HTTPS Server running on port 443');
+
+//     const run = async () => {
+//         try {
+//             await client.connect();
+//             const productsCollection = client.db("emajonsonNodeMongo").collection("products");
+//             console.log("db connected to mongo")
+
+//             // get product
+
+//             app.get('/product', async (req, res) => {
+//                 const query = req.body
+//                 const cursor = productsCollection.find(query)
+
+//                 const products = await cursor.toArray()
+//                 res.send(products)
+
+
+//             })
+
+
+
+//         }
+
+
+//         finally {
+//             // await client.close();
+//         }
+
+//     }
+//     run().catch(console.dir);
+// });
