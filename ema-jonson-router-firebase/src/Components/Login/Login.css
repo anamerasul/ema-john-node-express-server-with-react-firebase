@@ -1,0 +1,30 @@
+.form-container{
+
+    width:600px;
+border: 1px solid #95A0A7;
+box-sizing: border-box;
+border-radius: 8px;
+display: flex;
+justify-content: center;
+
+margin: 0 auto;
+}
+
+.form-title{
+
+    font-size: 35px;
+    font-weight:400;
+    color: #2a2a2a;
+}
+
+.input-group label{
+
+    display: block;
+    }
+.horizontal{
+
+    background-color:black;
+    width: 50px;
+    border-right-width: 60px;
+
+}
