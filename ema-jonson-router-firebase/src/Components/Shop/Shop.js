@@ -5,10 +5,11 @@ import UseProducts from '../Hooks/UseProduct';
 import Product from '../Product/Product';
 import { Link } from 'react-router-dom';
 import "./Shop.css"
+import UseCart from '../Hooks/UseCart';
 const Shop = () => {
 
     // const [products,setProducts]=useState([])
-    const [cart, setCart] = useState([])
+    const [cart, setCart] = UseCart()
 
     const [pageCount, setPageCount] = useState(0);
 
@@ -96,23 +97,23 @@ const Shop = () => {
         addToDb(sproduct._id)
     }
 
-    useEffect(() => {
-        const storedCart = getStoredCart()
+    // useEffect(() => {
+    //     const storedCart = getStoredCart()
 
-        const savedCart = []
+    //     const savedCart = []
 
-        for (const id in storedCart) {
-            const addedProduct = products.find(product => product._id === id)
-            // console.log(addedProduct)
+    //     for (const id in storedCart) {
+    //         const addedProduct = products.find(product => product._id === id)
+    //         // console.log(addedProduct)
 
-            if (addedProduct) {
-                const quantity = storedCart[id];
-                addedProduct.quantity = quantity
-                savedCart.push(addedProduct)
-            }
-        }
-        setCart(savedCart)
-    }, [products])
+    //         if (addedProduct) {
+    //             const quantity = storedCart[id];
+    //             addedProduct.quantity = quantity
+    //             savedCart.push(addedProduct)
+    //         }
+    //     }
+    //     setCart(savedCart)
+    // }, [products])
 
     return (
         <div className="  grid lg:grid-cols-[4fr,1fr] sm:grid-cols-[3fr,1fr] grid-cols-[1fr,1fr]">

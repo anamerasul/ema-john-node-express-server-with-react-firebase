@@ -91,6 +91,24 @@ const run = async () => {
         })
 
 
+        // use post product by id
+
+        app.post('/productByKeys', async (req, res) => {
+            const keys = req.body
+            const ids = keys.map(id => ObjectId(id))
+            const query = { _id: { $in: ids } }
+            const cursor = productsCollection.find(query)
+
+            const products = await cursor.toArray()
+            console.log(keys)
+
+            res.send(products)
+
+
+
+        })
+
+
 
     }
 
