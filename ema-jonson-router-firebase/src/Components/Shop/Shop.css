@@ -12,6 +12,12 @@
     gap:45px;
 }
 
+.pagination .selected {
+
+    background-color:yellowgreen;
+    color:white;
+}
+
 
 @media screen and (max-width:1100px) {
 

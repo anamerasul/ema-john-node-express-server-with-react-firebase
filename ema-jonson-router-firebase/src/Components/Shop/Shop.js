@@ -8,22 +8,50 @@ import "./Shop.css"
 const Shop = () => {
 
     // const [products,setProducts]=useState([])
-    const [products] = UseProducts([])
     const [cart, setCart] = useState([])
 
     const [pageCount, setPageCount] = useState(0);
 
 
-    const port = 3005
-    const urit = `http://localhost:${port}/product`
-    const path = `product-count`
-    const uri = `http://localhost`
+    const [page, setPage] = useState(0)
 
-    const url = `${uri}:${port}/${path}`
+    const [size, setSize] = useState(10)
+
+
+    const [products, setProducts] = useState([]);
+
+
+
 
     // console.log(url)
 
     useEffect(() => {
+
+        const port = 3005
+        const urit = `http://localhost:${port}/product`
+        const path = `product`
+        const uri = `http://localhost`
+
+        const url = `${uri}:${port}/${path}?page=${page}&size=${size}`
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setProducts(data))
+
+        console.log(url)
+    }, [])
+
+
+
+
+    // console.log(url)
+
+    useEffect(() => {
+        const port = 3005
+        const urit = `http://localhost:${port}/product`
+        const path = `product-count`
+        const uri = `http://localhost`
+
+        const url = `${uri}:${port}/${path}`
         fetch(url)
             .then(res => res.json())
             .then(data => {
@@ -116,10 +144,32 @@ const Shop = () => {
                 </Cart>
             </div>
 
-            <div className="mr-15 ml-20 my-10">
+            <div className="mr-15 ml-20 my-10 pagination">
                 {
-                    [...Array(pageCount).keys()].map(number => <button className='rounded-none px-4 py-2 mx-4  bg-orange-100'>{number + 1}</button>)
+                    [...Array(pageCount).keys()].map(number => <button
+
+                        key={number}
+                        onClick={() => setPage(number)}
+
+                        className={page === number ?
+                            'selected rounded-none px-4 py-2' :
+                            'rounded-none px-4 py-2 mx-4  bg-orange-100'
+                        }
+
+
+                    >{number + 1}</button>)
                 }
+
+                {
+                    size
+                }
+                <select onChange={e => setSize(e.target.value)} name="" id="">
+
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
 
             </div>
         </div>
