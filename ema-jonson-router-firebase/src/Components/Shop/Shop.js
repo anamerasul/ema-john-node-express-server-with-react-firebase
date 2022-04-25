@@ -10,6 +10,30 @@ const Shop = () => {
     // const [products,setProducts]=useState([])
     const [products] = UseProducts([])
     const [cart, setCart] = useState([])
+
+    const [pageCount, setPageCount] = useState(0);
+
+
+    const port = 3005
+    const urit = `http://localhost:${port}/product`
+    const path = `product-count`
+    const uri = `http://localhost`
+
+    const url = `${uri}:${port}/${path}`
+
+    // console.log(url)
+
+    useEffect(() => {
+        fetch(url)
+            .then(res => res.json())
+            .then(data => {
+
+                const count = data.count
+                const pages = Math.ceil(count / 10)
+                setPageCount(pages)
+            })
+    }, [])
+
     // console.log(cart)
     // useEffect(()=>{
     //     console.log('before fetch')
@@ -78,7 +102,11 @@ const Shop = () => {
                     ></Product>)
 
                 }
+
+
             </div>
+
+
             <div className="cart-container sticky top-0 h-[900px] ml-auto bg-orange-300 w-full ">
 
                 <Cart cart={cart}>
@@ -86,6 +114,13 @@ const Shop = () => {
                         <button>Rewiew order</button>
                     </Link>
                 </Cart>
+            </div>
+
+            <div className="mr-15 ml-20 my-10">
+                {
+                    [...Array(pageCount).keys()].map(number => <button className='rounded-none px-4 py-2 mx-4  bg-orange-100'>{number + 1}</button>)
+                }
+
             </div>
         </div>
     );
