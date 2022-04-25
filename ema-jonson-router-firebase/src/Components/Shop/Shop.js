@@ -38,7 +38,7 @@ const Shop = () => {
             .then(data => setProducts(data))
 
         console.log(url)
-    }, [])
+    }, [page, size])
 
 
 
