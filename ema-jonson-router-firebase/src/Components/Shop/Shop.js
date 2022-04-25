@@ -159,10 +159,10 @@ const Shop = () => {
 
                     >{number + 1}</button>)
                 }
-
+                {/* {page}
                 {
                     size
-                }
+                } */}
                 <select onChange={e => setSize(e.target.value)} name="" id="">
 
                     <option value="5">5</option>

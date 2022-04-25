@@ -46,7 +46,7 @@ const run = async () => {
     try {
         await client.connect();
         const productsCollection = client.db("emajonsonNodeMongo").collection("products");
-        console.log("db connected to mongo")
+        console.log("db connected to mono")
 
         // get product 
 
@@ -58,6 +58,8 @@ const run = async () => {
 
 
             console.log(query)
+
+            console.log(req.query)
             const cursor = productsCollection.find(query)
 
             let products;
@@ -80,8 +82,8 @@ const run = async () => {
 
 
         app.get('/product-count', async (req, res) => {
-            const query = {}
-            const cursor = productsCollection.find(query)
+            // const query = {}
+            // const cursor = productsCollection.find(query)
 
             const count = await productsCollection.estimatedDocumentCount()
             res.send({ count })
